@@ -13,7 +13,7 @@ export default class AppButton extends Component {
     render() {
         return (
             <TouchableOpacity
-                onPress={() => { this.props.onPressButton !== undefined && this.props.onPressButton() }}
+                onPress={() => { this.props.onPress !== undefined && this.props.onPress() }}
                 underlayColor="white"
                 style={[styles.Btn,this.props.styles]}>
                 <Text style={[{ color: '#fff', fontSize: 14,  },this.props.TextStyle]}>{this.props.buttonText}</Text>
@@ -26,12 +26,16 @@ export default class AppButton extends Component {
 const styles = StyleSheet.create({
     Btn: {
         margin: 10,
-        borderRadius: 30,
+        borderRadius: 45/2,
         height: 45,
+        width:45,
         alignItems: 'center',
         justifyContent: 'center',
         padding: 10,
-        backgroundColor: COLORS.appGreen,
-        alignSelf: 'center'
+        backgroundColor: COLORS.white,
+        position:"absolute",
+        right:10,
+        bottom:10
+
     },
 })

@@ -3,16 +3,11 @@ import React from 'react';
 import { View, StyleSheet, Text, TouchableOpacity, FlatList } from 'react-native';
 import moment from 'moment';
 
-const NewsList = (props) => {
-    let orderList = props.orderList;
-
-
+const List = (props) => {
     const renderItem = (item, index) => {
         return (
-            <TouchableOpacity style={styles.topView}>
-               <Text style={{fontSize:11}}>{item.date}</Text>
-               <Text style={{fontSize:18,fontWeight:"bold",marginVertical:10}}>{item.title}</Text>
-               <Text style={{fontSize:13}}>{item.content}</Text> 
+            <TouchableOpacity style={styles.topView} onPress={()=>{props.onItemPress(item)}}>
+               <Text style={{fontSize:11}}>{item.name}</Text>
             </TouchableOpacity>
         )
     }
@@ -20,7 +15,7 @@ const NewsList = (props) => {
     return (
             <View>
                 <FlatList
-                    data={orderList}
+                    data={props.list}
                     keyExtractor={(item, index) => item.id + index}
                     listKey={'SelectIndustriesScreen' + moment().format('x')}
                     removeClippedSubvisews={false}
@@ -69,4 +64,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default NewsList;
+export default List;

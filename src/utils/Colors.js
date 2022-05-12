@@ -5,6 +5,7 @@ export  const COLORS = {
     borderColor: "#D4D4D4",
     tabBarBackground: "#F7F5F6",
     splashBackground: "#FFFF",
+    white:'#fff'
 
 }
 

@@ -5,6 +5,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { COLORS } from '../../utils/Colors';
 import HomeDashboard from './HomeDashboard';
+import AllListScreen from './AllListScreen';
+
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -13,12 +15,12 @@ const Tab = createBottomTabNavigator();
 function HomeTab() {
   return (
       <Tab.Navigator
-      initialRouteName={'HomeDashboard'}
+      initialRouteName={'home'}
         tabBarOptions={{
           keyboardHidesTabBar: true,
           activeTintColor: COLORS.appGreen,
           inactiveTintColor: COLORS.grayText,
-          labelStyle: {fontSize: 12 },
+          labelStyle: {fontSize: 16,fontWeight:"800" },
           style: {
             backgroundColor: COLORS.tabBarBackground,
           },
@@ -36,7 +38,7 @@ function HomeTab() {
             tabBarLabel: 'All List',
           }} 
         name="allList" 
-        component={HomeDashboard} />
+        component={AllListScreen} />
      
       </Tab.Navigator>
   );
