@@ -16,7 +16,7 @@ export default class AppButton extends Component {
                 onPress={() => { this.props.onPress !== undefined && this.props.onPress() }}
                 underlayColor="white"
                 style={[styles.Btn,this.props.styles]}>
-                <Text style={[{ color: '#fff', fontSize: 14,  },this.props.TextStyle]}>{this.props.buttonText}</Text>
+                <Text style={[styles.btnTxtStyle,this.props.TextStyle]}>{this.props.buttonText}</Text>
             </TouchableOpacity>
 
         )
@@ -38,4 +38,5 @@ const styles = StyleSheet.create({
         bottom:10
 
     },
+    btnTxtStyle:{ color: COLORS.appGreen, fontSize: 20,fontWeight:"bold"  }
 })

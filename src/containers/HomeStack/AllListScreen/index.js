@@ -10,6 +10,7 @@ import List from '../../../components/List'
 import {
     queryAllLists,
     deleteList,
+    insertNewGroceryList
   } from '../../../Realm/dbSchema';
 import { useIsFocused } from "@react-navigation/native";
 
@@ -29,11 +30,16 @@ const HomeDashboard = (props) => {
           .catch(e => {setList([])});
       };
 
-      deleteListItem = (item) => {
-        deleteList(item.id)
-        .then()
-        .catch(err => alert(`Delete GroceryList error ${err}`));
-        reloadData();
+      addItemToList = () => {
+       const newItemList = {
+            id: Math.floor(Date.now() / 1000),
+            name: "Test Name: "+Math.floor(Date.now() / 1000),
+            creationDate: new Date(),
+          };
+          insertNewGroceryList(newItemList)
+            .then()
+            .catch(err => alert(`Insert new GrocerryItem err: ${err}`));
+            reloadData()
       };
     return (
         <View style={styles.mainContainer}>
@@ -42,14 +48,12 @@ const HomeDashboard = (props) => {
             <SafeAreaView style={styles.mainContainer}>
             <List 
             list={list}
-            onItemPress={(item)=>{
-                deleteListItem(item)
-            }}
+            onItemPress={(item)=>{}}
             />
             <AddButton 
             buttonText={CONSTANTS.ADD}
             onPress={()=>{
-                navigation.navigate(NAV_CONSTS.ALL_LIST)
+                addItemToList()
             }}/>
             </SafeAreaView>
         </View>
