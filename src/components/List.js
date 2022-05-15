@@ -4,10 +4,11 @@ import { View, StyleSheet, Text, TouchableOpacity, FlatList } from 'react-native
 import moment from 'moment';
 
 const List = (props) => {
+    
     const renderItem = (item, index) => {
         return (
             <TouchableOpacity style={styles.topView} onPress={()=>{props.onItemPress(item)}}>
-               <Text style={{fontSize:11}}>{item.name}</Text>
+               <Text style={[styles.txtStyle,item.isScratched && props.scratchStyle]}>{item.name}</Text>
             </TouchableOpacity>
         )
     }
@@ -24,7 +25,6 @@ const List = (props) => {
                     }}
                     showsHorizontalScrollIndicator={false}
                     style={{paddingBottom:50}}
-                // contentContainerStyle={{ marginTop: 20 }}
                 />
             </View>
             );
@@ -32,7 +32,6 @@ const List = (props) => {
 
 const styles = StyleSheet.create({
     topView: {
-        // height: 260,
         marginHorizontal: 10,
         padding: 10,
         marginVertical: 10,
@@ -61,7 +60,8 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
         elevation: 5,
-    }
+    },
+    txtStyle:{fontSize:16}
 });
 
 export default List;

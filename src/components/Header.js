@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {
-    Platform,
     StyleSheet,
     Text,
     View,
@@ -21,7 +20,7 @@ export default Header = (props) => {
             style={{backgroundColor:COLORS.appGreen}}
             />
             <View style={[styles.container, props.containerStyle]} >
-                <TouchableOpacity
+               {props.onLeftAction && <TouchableOpacity
                     disabled={_.isNil(props.onLeftAction)}
                     onPress={() => {
                         if (props.onLeftAction && typeof props.onLeftAction) {
@@ -40,7 +39,7 @@ export default Header = (props) => {
                             {props.leftText}
                         </Text>
                     }
-                </TouchableOpacity>
+                </TouchableOpacity>}
                 <View style={[styles.centerComponentStyle, props.centerComponentExtraStyle]}>
                     {props.centerComponent &&
                         <Image style={{width: 40,resizeMode: "cover",alignSelf: "center",borderRadius: 20,height: 40}} source={props.centerComponent} />
@@ -126,8 +125,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     buttonContainer: {
-        width: 50,
-        height: 50,
+        width: 70,
+        height: 70,
         alignItems: 'center',
         justifyContent: 'center',
         padding: 15
@@ -144,12 +143,16 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
     },
     buttonText: {
+        marginHorizontal:1,
+        fontSize:12,
+        fontWeight: 'bold',
 
     },
     hearderText: {
-        fontSize: 18,
+        fontSize: 28,
         fontWeight: 'bold',
         color: 'white',
-        textAlign: 'center'
+        textAlign: 'left',
+        marginHorizontal:10
     }
 })

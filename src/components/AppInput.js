@@ -123,11 +123,12 @@ const styles = StyleSheet.create({
         height: 45,
         alignItems: 'center',
         backgroundColor: 'transparent',
-        marginTop: 10,
+        marginTop: "10%",
         paddingHorizontal: 15,
         borderWidth: 1,
         borderRadius: 5,
         borderColor: '#D4D4D4',
+        // marginVertical:20
         
     },
     labelContainerStyle: {

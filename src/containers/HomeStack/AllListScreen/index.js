@@ -8,54 +8,74 @@ import Header from '../../../components/Header';
 import  AddButton from '../../../components/AddButton'
 import List from '../../../components/List'
 import {
-    queryAllLists,
-    deleteList,
-    insertNewGroceryList
-  } from '../../../Realm/dbSchema';
+    insertNewGroceryList,
+    getAllLists,
+  } from '../../../Realm/dbSchema2';
 import { useIsFocused } from "@react-navigation/native";
+import ModalComponent from '../../../components/Modal'
 
-const HomeDashboard = (props) => {
+const AllListScreen = (props) => {
     const isFocused = useIsFocused();
     const { navigation } = props;
     const [list, setList] = useState([]);
-   
+    const [text, setText] = useState("");
+    const [isModalVisible, setIsModalVisible] = useState(false);
+
+
     useEffect(() => {
         reloadData()
     }, [isFocused]);
+    
     reloadData = () => {
-        queryAllLists()
+        getAllLists()
           .then(groceryLists => {
               setList(groceryLists); 
         })
-          .catch(e => {setList([])});
+          .catch(e => {alert(e)});
       };
 
-      addItemToList = () => {
+
+      addList = (name) => {
        const newItemList = {
             id: Math.floor(Date.now() / 1000),
-            name: "Test Name: "+Math.floor(Date.now() / 1000),
+            name: name,
             creationDate: new Date(),
+            status:CONSTANTS.PENDIND
           };
           insertNewGroceryList(newItemList)
-            .then()
+            .then((item)=>{
+                    onModalClose()
+            })
             .catch(err => alert(`Insert new GrocerryItem err: ${err}`));
-            reloadData()
+        
+        reloadData()
       };
+
+    onModalClose = ()=>{setIsModalVisible(false)}
+      
     return (
         <View style={styles.mainContainer}>
             <Header
-             hearderText={CONSTANTS.GROCERY_LIST}/>
+             hearderText={CONSTANTS.ALL_LIST}/>
             <SafeAreaView style={styles.mainContainer}>
             <List 
             list={list}
-            onItemPress={(item)=>{}}
+            onItemPress={(item)=>{
+                navigation.navigate(NAV_CONSTS.CREATE_LIST,{groceryItem:item})
+            }}
             />
             <AddButton 
             buttonText={CONSTANTS.ADD}
             onPress={()=>{
-                addItemToList()
+                setIsModalVisible(true)
             }}/>
             </SafeAreaView>
+            <ModalComponent isVisible={isModalVisible}
+                placeholder={ CONSTANTS.LIST_NAME}
+                onPressSave={()=>{addList(text)}}
+                onClosePress={onModalClose}
+                onChangeText={(text)=>{setText(text)}}
+                />
         </View>
     )
 };
@@ -64,4 +84,4 @@ const styles = StyleSheet.create({
     mainContainer:{ flex: 1, backgroundColor:COLORS.appGreen },
 });
 
-export default HomeDashboard;
+export default AllListScreen;

@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import {
-    Platform,
     StyleSheet,
     Text,
     View,
-    TouchableOpacity,
 } from 'react-native';
 import { COLORS } from '../utils/Colors';
 
@@ -17,7 +15,6 @@ export default RowText = (props) => {
             <Text style={[styles.leftTextStyle, leftTextStyle]}>{leftText}</Text>
             <View style={{width: '55%',flexDirection: "row"}}>
                 <Text style={[styles.rightTextStyle, rightTextStyle,
-                    // {color: rightText == 'In Process'|| rightText == 'Completed'|| rightText == 'Completed But Unpaid'? COLORS.appGreen :rightText == 'Unpaid'?"red": 'black'}
                     ]}>{rightText}</Text>
                 {showStatus &&
                     <Text style={[{ color: rightText == 'In Process' ? COLORS.appGreen : "red", fontWeight: "bold" }, statusTextStyle]}>{status}</Text>
@@ -32,7 +29,6 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: 'space-between',
         margin: 5,
-        // height: 20,
     },
     leftTextStyle: {
         width: '40%',
@@ -42,8 +38,6 @@ const styles = StyleSheet.create({
     rightTextStyle: {
         width: '80%',
         color: '#777777',
-        // fontWeight: "bold",
-        // alignSelf: "center"
     },
     statusTextStyle: {
 

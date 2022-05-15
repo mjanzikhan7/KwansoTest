@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { View, ActivityIndicator, Modal,StyleSheet} from 'react-native';
-import Assets from '../assets/index';
 import { COLORS } from '../utils/Colors';
 
 export default Loader = props => {
-    //console.log('loader is called')
     if(props.showLoading){
         return (
             <View style={[{

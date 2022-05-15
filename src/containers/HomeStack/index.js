@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { View, Text,Image } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { COLORS } from '../../utils/Colors';
 import HomeDashboard from './HomeDashboard';
 import AllListScreen from './AllListScreen';
+import CreateListScreen from './CreateListScreen';
+
 
 
 const Stack = createStackNavigator();
@@ -53,6 +53,8 @@ function HomeStack() {
         headerShown: false
       }}>
       <Stack.Screen name="HomeDashboard" component={HomeTab} />
+      <Stack.Screen name="CreateList" component={CreateListScreen} />
+
     </Stack.Navigator>
   );
 }

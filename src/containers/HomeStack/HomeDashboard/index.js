@@ -1,39 +1,46 @@
 
 import React, { useEffect, useState } from 'react';
-import { View, Image, StyleSheet, SafeAreaView, } from 'react-native';
+import { View, StyleSheet, SafeAreaView, } from 'react-native';
 import { COLORS } from '../../../utils/Colors';
-import {CONSTANTS,NAV_CONSTS} from '../../../constants'
-import Loader from '../../../components/loader';
+import {CONSTANTS} from '../../../constants'
 import Header from '../../../components/Header';
-import  AddButton from '../../../components/AddButton'
 import List from '../../../components/List'
 import {
-    queryAllLists,
+    getAllLists,
     deleteList,
-  } from '../../../Realm/dbSchema';
+    updateGroceryItem
+  } from '../../../Realm/dbSchema2';
+  import {
+    getLatestList,
+    markListComplete
+  } from '../../../utils/CommonOperations'
 import { useIsFocused } from "@react-navigation/native";
 
 const HomeDashboard = (props) => {
     const isFocused = useIsFocused();
-    const { navigation } = props;
-    const [list, setList] = useState([]);
+    const [listObject, setListObject] = useState([]);
    
     useEffect(() => {
         reloadData()
     }, [isFocused]);
+
     reloadData = () => {
-        queryAllLists()
+        getAllLists()
           .then(groceryLists => {
-              setList(groceryLists); 
+              setListObject(getLatestList(groceryLists)); 
         })
-          .catch(e => {setList([])});
+          .catch(e => {alert(e)});
       };
 
-      deleteListItem = (item) => {
-        deleteList(item.id)
-        .then()
-        .catch(err => alert(`Delete GroceryList error ${err}`));
-        reloadData();
+      scratchItem = (item) => {
+        updateGroceryItem(item)
+        .then(()=>{
+            markListComplete(listObject,reloadData)
+            reloadData()
+        })
+        .catch(err => alert(`Update operation failed ${err}`));
+    
+    
       };
     return (
         <View style={styles.mainContainer}>
@@ -41,16 +48,12 @@ const HomeDashboard = (props) => {
              hearderText={CONSTANTS.GROCERY_LIST}/>
             <SafeAreaView style={styles.mainContainer}>
             <List 
-            list={list}
+            list={listObject?.list}
             onItemPress={(item)=>{
-                deleteListItem(item)
+                scratchItem(item) 
             }}
+            scratchStyle={styles.strikeStyle}
             />
-            <AddButton 
-            buttonText={CONSTANTS.ADD}
-            onPress={()=>{
-                navigation.navigate(NAV_CONSTS.ALL_LIST)
-            }}/>
             </SafeAreaView>
         </View>
     )
@@ -58,6 +61,7 @@ const HomeDashboard = (props) => {
 
 const styles = StyleSheet.create({
     mainContainer:{ flex: 1, backgroundColor:COLORS.appGreen },
+    strikeStyle:{textDecorationLine: 'line-through', textDecorationStyle: 'solid'}
 });
 
 export default HomeDashboard;

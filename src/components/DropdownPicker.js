@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { View, TouchableOpacity, TextInput, Image, Text, StyleSheet } from 'react-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview';
-import Assets from '../assets';
+import { View, StyleSheet } from 'react-native';
 import { Picker } from 'native-base';
 
 export default class DropdownPicker extends Component {
@@ -20,9 +18,6 @@ export default class DropdownPicker extends Component {
                     style={{marginLeft: 5,marginRight:5,marginTop:-5, width:"100%"}}
                     textStyle={{ color: "#000", fontSize:    14,width:"100%" }}
                     itemStyle={{
-                        // backgroundColor: "#d3d3d3",
-                        // marginLeft: 0,
-                        // paddingLeft: 10,
                         fontSize: 14
                     }}
                     selectedValue={this.props.selectedValue}
@@ -42,10 +37,7 @@ export default class DropdownPicker extends Component {
 const styles = StyleSheet.create({
     featureBgStyle1: {
         flexDirection: 'row', width: '90%',
-        // alignItems: 'center',
-        // backgroundColor: Assets.colors.rowBg,
         marginBottom: 5, borderRadius: 10,
-        // padding: -5,
         elevation: 1,
         marginTop: 10,
         height: 40

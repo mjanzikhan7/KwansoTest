@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { View, TouchableOpacity, TextInput, Image, Text, StyleSheet } from 'react-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview';
-import Assets from '../assets';
 
 export default class EditTextWithButton extends Component {
     constructor(props) {
@@ -20,7 +18,6 @@ export default class EditTextWithButton extends Component {
 
                 <TextInput
                     {...this.props}
-                    // placeholderTextColor={Assets.colors.textPlaceholderColor}
                     style={[styles.featureTextValueStyle, this.props.styleInput]}
                 />
 
@@ -29,9 +26,7 @@ export default class EditTextWithButton extends Component {
                         if (selectFile && typeof selectFile == 'function') selectFile()
                     }}
                     style={styles.selectFileButtonStyle}>
-                    <Text
-                        // style={{ color: Assets.colors.textColor }}
-                        >
+                    <Text>
                         SELECT FILE
                     </Text>
                 </TouchableOpacity>
@@ -49,7 +44,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         width: '90%',
         alignItems: 'center',
-        // backgroundColor: Assets.colors.rowBg,
         margin: 5, borderRadius: 5,
         padding: 7,
         elevation: 3,
@@ -57,19 +51,15 @@ const styles = StyleSheet.create({
     },
     featureBgStyle2: {
         flexDirection: 'column', width: '45%', alignItems: 'center',
-        // backgroundColor: Assets.colors.featureBg2,
         margin: 5, borderWidth: 0.2, borderRadius: 10,
     },
     featureTextLabelStyle: {
-        // color: Assets.colors.black,
         fontSize: 11,
         fontWeight: 'bold',
         width: '40%',
         marginStart: 15
     },
     featureTextValueStyle: {
-        // color: Assets.colors.textPlaceholderColor,
-        // color: '#464646',
         fontSize: Platform.OS === 'ios' ? 10 : 12,
         width: '60%',
         fontWeight: "800",
@@ -80,7 +70,6 @@ const styles = StyleSheet.create({
 
     },
     selectFileButtonStyle: {
-        // backgroundColor: Assets.colors.gradientColor1,
         height: 45,
         flexDirection: "column",
         width: "40%",
