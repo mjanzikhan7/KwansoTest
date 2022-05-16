@@ -37,7 +37,7 @@ export const GroceryDB_Schema = {
 };
 
 const databaseOptions = {
-  path: 'jkhan.grocerylist3',
+  path: 'jkhan.grocerylistapp',
   schema: [GroceryDB_Schema,LIST_ITEM_Schema, GroceryList_Schema],
   schemaVersion: 1, // optional
 };
